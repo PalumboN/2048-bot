@@ -34,7 +34,7 @@ function Ai() {
 
     // STRATEGY 1: Magic Number
     if (this.danger && this.lastMove > 1) { //Si el último movimiento fue por estar encerrado, intenta volver al estado natural
-      let callback = this.lastMove - 2
+      let callback = (this.lastMove == 2) ? 1 : 0
       if (grid.copy().move(callback)) {
         console.log("Danger move detected!", callback)
         this.danger = false
