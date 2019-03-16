@@ -4,6 +4,7 @@
   "description": "IA para ganar el 2048",
   "main": "ai.js",
   "scripts": {
+    "start": "node ai.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/PalumboN/2048-bot/issues"
   },
-  "homepage": "https://github.com/PalumboN/2048-bot#readme"
+  "homepage": "https://github.com/PalumboN/2048-bot#readme",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
 }
