@@ -25,14 +25,14 @@ function Ai() {
     //              This changes the state of the grid object, so you should probably copy() the grid before using this.
     //              Naturally the modified state doesn't contain information about new tiles.
     //              Method returns true if you can move to that direction, false otherwise.
-    const current = countBlocks(grid)
+    const current = magicNumber(grid)
     let minimum = current
     let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
     console.log("actual:", current)
     for (let mov = 0; mov < 4; mov++) {
       const newGrid = grid.copy()
       if (newGrid.move(mov)) {
-        const count = countBlocks(newGrid)
+        const count = magicNumber(newGrid)
         if (minimum > count) {
           minimum = count
           nextMove = mov
@@ -44,11 +44,25 @@ function Ai() {
   }
 }
 
+function magicNumber(grid) {
+  return countBlocks(grid) * countValues(grid)
+}
+
 function countBlocks(grid) {
   let n = 0
   for (let x = 0; x < 4; x++) {
     for (let y = 0; y < 4; y++) {
       n += grid.cells[x][y] ? 1 : 0;
+    }
+  }
+  return n
+}
+
+function countValues(grid) {
+  let n = 0
+  for (let x = 0; x < 4; x++) {
+    for (let y = 0; y < 4; y++) {
+      n += grid.cells[x][y] ? grid.cells[x][y].value : 0;
     }
   }
   return n
