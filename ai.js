@@ -30,37 +30,37 @@ function Ai() {
     //              Method returns true if you can move to that direction, false otherwise.
 
     // STRATEGY 1: Magic Number
-    // const current = magicNumber(grid)
-    // let minimum = current
-    // let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
-    // console.log("actual:", current)
-    // for (let mov = 0; mov < 4; mov++) {
-    //   const newGrid = grid.copy()
-    //   if (newGrid.move(mov)) {
-    //     const count = magicNumber(newGrid)
-    //     if (minimum > count) {
-    //       minimum = count
-    //       nextMove = mov
-    //     }
-    //   }
-    // }
-    // console.log("Moving", nextMove)
-    // return nextMove
+    const current = magicNumber(grid)
+    let minimum = current
+    let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
+    console.log("actual:", current)
+    for (let mov = 0; mov < 4; mov++) {
+      const newGrid = grid.copy()
+      if (newGrid.move(mov)) {
+        const count = magicNumber(newGrid)
+        if (minimum > count) {
+          minimum = count
+          nextMove = mov
+        }
+      }
+    }
+    console.log("Moving", nextMove)
+    return nextMove
 
 
     // STRATEGY 2: Corner
-    if (grid.copy().move(this.current)) {
-      let n = this.current
-      this.current = (this.current == 0) ? 1 : 0
-      return n
-    } else {
-      return [0, 1, 2, 3].find(n => grid.copy().move(n))
-    }
+    // if (grid.copy().move(this.current)) {
+    //   let n = this.current
+    //   this.current = (this.current == 0) ? 1 : 0
+    //   return n
+    // } else {
+    //   return [0, 1, 2, 3].find(n => grid.copy().move(n))
+    // }
   }
 }
 
 function magicNumber(grid) {
-  return countBlocks(grid) * countValues(grid)
+  return countBlocks(grid) * (2 ** countValues(grid))
 }
 
 function countBlocks(grid) {
