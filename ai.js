@@ -1,12 +1,15 @@
 function Ai() {
+  this.current = 0
   this.init = function () {
     // This method is called when AI is first initialized.
     console.log("START")
+    this.restart()
   }
 
   this.restart = function () {
     // This method is called when the game is reset.
     console.log("RESET")
+    this.current = 0
   }
 
   this.step = function (grid) {
@@ -25,22 +28,34 @@ function Ai() {
     //              This changes the state of the grid object, so you should probably copy() the grid before using this.
     //              Naturally the modified state doesn't contain information about new tiles.
     //              Method returns true if you can move to that direction, false otherwise.
-    const current = magicNumber(grid)
-    let minimum = current
-    let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
-    console.log("actual:", current)
-    for (let mov = 0; mov < 4; mov++) {
-      const newGrid = grid.copy()
-      if (newGrid.move(mov)) {
-        const count = magicNumber(newGrid)
-        if (minimum > count) {
-          minimum = count
-          nextMove = mov
-        }
-      }
+
+    // STRATEGY 1: Magic Number
+    // const current = magicNumber(grid)
+    // let minimum = current
+    // let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
+    // console.log("actual:", current)
+    // for (let mov = 0; mov < 4; mov++) {
+    //   const newGrid = grid.copy()
+    //   if (newGrid.move(mov)) {
+    //     const count = magicNumber(newGrid)
+    //     if (minimum > count) {
+    //       minimum = count
+    //       nextMove = mov
+    //     }
+    //   }
+    // }
+    // console.log("Moving", nextMove)
+    // return nextMove
+
+
+    // STRATEGY 2: Corner
+    if (grid.copy().move(this.current)) {
+      let n = this.current
+      this.current = (this.current == 0) ? 1 : 0
+      return n
+    } else {
+      return [0, 1, 2, 3].find(n => grid.copy().move(n))
     }
-    console.log("Moving", nextMove)
-    return nextMove
   }
 }
 
