@@ -45,7 +45,7 @@ function Ai() {
     const current = magicNumber(grid)
     let minimum = current
     let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
-    if (!nextMove) return; //LOSE
+    // if (!nextMove) return; //LOSE
     this.danger = true
     for (let mov = 0; mov < 4; mov++) {
       const newGrid = grid.copy()
@@ -75,7 +75,7 @@ function Ai() {
 }
 
 function magicNumber(grid) {
-  return countBlocks(grid) * (2 ** countValues(grid))
+  return countValues(grid) * (2 ** countBlocks(grid))
 }
 
 function countBlocks(grid) {
