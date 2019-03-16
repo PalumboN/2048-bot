@@ -25,7 +25,22 @@ function Ai() {
     //              This changes the state of the grid object, so you should probably copy() the grid before using this.
     //              Naturally the modified state doesn't contain information about new tiles.
     //              Method returns true if you can move to that direction, false otherwise.
-    console.log(grid.move(0))
+    console.log(countBlocks(grid))
+    for (let mov = 0; mov < 4; mov++) {
+      const newGrid = grid.copy()
+      newGrid.move(mov)
+      console.log(countBlocks(newGrid))
+    }
     return 0;
   }
+}
+
+function countBlocks(grid) {
+  let n = 0
+  for (let x = 0; x < 4; x++) {
+    for (let y = 0; y < 4; y++) {
+      n += grid.cells[x][y] ? 1 : 0;
+    }
+  }
+  return n
 }
