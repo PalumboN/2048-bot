@@ -1,5 +1,8 @@
 function Ai() {
   this.current = 0
+  this.lastMove = 0
+  this.danger = false
+
   this.init = function () {
     // This method is called when AI is first initialized.
     console.log("START")
@@ -30,10 +33,20 @@ function Ai() {
     //              Method returns true if you can move to that direction, false otherwise.
 
     // STRATEGY 1: Magic Number
+    if (this.danger && this.lastMove > 1) { //Si el último movimiento fue por estar encerrado, intenta volver al estado natural
+      let callback = this.lastMove - 2
+      if (grid.copy().move(callback)) {
+        console.log("Danger move detected!", callback)
+        this.danger = false
+        return callback
+      }
+    }
+
     const current = magicNumber(grid)
     let minimum = current
     let nextMove = [0, 1, 2, 3].find(n => grid.copy().move(n))
-    console.log("actual:", current)
+    if (!nextMove) return; //LOSE
+    this.danger = true
     for (let mov = 0; mov < 4; mov++) {
       const newGrid = grid.copy()
       if (newGrid.move(mov)) {
@@ -41,10 +54,12 @@ function Ai() {
         if (minimum > count) {
           minimum = count
           nextMove = mov
+          this.danger = false
         }
       }
     }
     console.log("Moving", nextMove)
+    this.lastMove = nextMove
     return nextMove
 
 
