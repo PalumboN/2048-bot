@@ -1,0 +1,26 @@
+{
+  "name": "2048-bot",
+  "version": "1.0.0",
+  "description": "IA para ganar el 2048",
+  "main": "ai.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PalumboN/2048-bot.git"
+  },
+  "keywords": [
+    "2048",
+    "AI",
+    "IA",
+    "bot",
+    "game"
+  ],
+  "author": "PalumboN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PalumboN/2048-bot/issues"
+  },
+  "homepage": "https://github.com/PalumboN/2048-bot#readme"
+}
